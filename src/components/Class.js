@@ -14,12 +14,13 @@ const Class = (props) => {
 
     // 在資料不存在時顯示預設內容或錯誤處理
     // 為何前面請求 http 未做完就送props過來?
+    // 這邊可以做成function 用useEffect 做偵測，抓完資料才執行
     if (!props.data || !props.data.data || !props.data.data.records) {
         return <div>資料讀取中...</div>;
     }
     else {
         // 處理縣市重複過濾
-        props.data.data.records.map((item) => {
+        props.data.data.records?.map((item) => {
             var check = false;
             for (var i in Country)
                 if (item.county === Country[i]) {
@@ -63,9 +64,7 @@ const Class = (props) => {
                                         <tr key={item.siteid} >
                                             <td style={{ border: "0.1rem solid black", color: "black", background: Color }}>
                                                 地區：{item.sitename}，AQI：{item.aqi === '' ? '暫無資料' : item.aqi}
-                                                ，空氣品質：{item.status === null ? '暫無資料' : item.status}
-
-
+                                                ，空氣品質：{item.status === "" ? '暫無資料' : item.status}
                                             </td>
                                         </tr>
                                     )
