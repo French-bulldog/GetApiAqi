@@ -4,7 +4,7 @@ import Class from '../components/Class';
 
 const Home = () => {
     // API 網址
-    const initialURL = "https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON";
+    const initialURL = "https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON";
     let [data, setData] = useState(null);
     const [county, setCounty] = useState('臺北市');
 
