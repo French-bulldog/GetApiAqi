@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Styles from "./moduleCSS/Class.module.css"
+// import Styles from "./moduleCSS/Class.module.css"
+import './styles/Class.css';
 
 const Class = (props) => {
 
@@ -21,6 +22,8 @@ const Class = (props) => {
     else {
         // 處理縣市重複過濾
         props.data.data.records?.map((item) => {
+            console.log(props.data.data);
+
             var check = false;
             for (var i in Country)
                 if (item.county === Country[i]) {
@@ -32,7 +35,8 @@ const Class = (props) => {
         })
 
         return (
-            <div>
+            <div className='Class'>
+
                 <div className="container mt-4">
                     <h2>各縣市空氣品質AQI</h2>
                     <select className="form-select" aria-label="Select example" defaultValue="臺北市" onChange={selectHandler}>
@@ -43,36 +47,39 @@ const Class = (props) => {
                         }
                     </select>
                 </div>
-                <table>
-                    <thead>
 
-                        {/* 
+                <div className='body container'>
+                    <table className='container'>
+                        <thead>
+
+                            {/* 
                         40上
                         15-40
                         15下
                         這邊本來要用reducer 因為只有一個變數，所以只會有一個狀態，無法及時渲染，
                         這邊只能乖乖用style改
                     */}
-                        {
-                            props.data.data.records.map((item) => {
-                                if (item.county === props.county) {
-                                    if (item.aqi > 40) Color = "red";
-                                    else if (item.aqi >= 15 && item.aqi <= 40) Color = "yellow";
-                                    else Color = "green";
+                            {
+                                props.data.data.records.map((item) => {
+                                    if (item.county === props.county) {
+                                        if (item.aqi > 40) Color = "red";
+                                        else if (item.aqi >= 15 && item.aqi <= 40) Color = "yellow";
+                                        else Color = "green";
 
-                                    return (
-                                        <tr key={item.siteid} >
-                                            <td style={{ border: "0.1rem solid black", color: "black", background: Color }}>
-                                                地區：{item.sitename}，AQI：{item.aqi === '' ? '暫無資料' : item.aqi}
-                                                ，空氣品質：{item.status === "" ? '暫無資料' : item.status}
-                                            </td>
-                                        </tr>
-                                    )
-                                }
-                            })
-                        }
-                    </thead>
-                </table>
+                                        return (
+                                            <tr key={item.siteid} >
+                                                <td style={{ border: "0.1rem solid black", color: "black", background: Color }}>
+                                                    地區：{item.sitename}，AQI：{item.aqi === '' ? '暫無資料' : item.aqi}
+                                                    ，空氣品質：{item.status === "" ? '暫無資料' : item.status}
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                })
+                            }
+                        </thead>
+                    </table>
+                </div>
 
             </div>
         );

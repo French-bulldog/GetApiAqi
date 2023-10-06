@@ -22,9 +22,12 @@ const Home = () => {
 
     return (
         <div>
-            <Class data={data} setData={setData}
+            <Class
+                data={data}
+                setData={setData}
                 search={() => search(initialURL)}
-                county={county} setCounty={setCounty}
+                county={county}
+                setCounty={setCounty}
             />
         </div>
 

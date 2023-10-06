@@ -6,10 +6,10 @@ const Layout = () => {
         <>
             <nav>
                 <ul>
-                    <li>
+                    {/* <li>
                         <Link to="/" className='nav-link active text-warning'>首頁</Link>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <Link to="/contact">關於我們</Link>
                     </li>
                     <li>
@@ -17,7 +17,7 @@ const Layout = () => {
                     </li>
                     <li>
                         <Link to="*">錯誤頁面</Link>
-                    </li>
+                    </li> */}
                 </ul>
             </nav>
 

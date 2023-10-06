@@ -1,0 +1,23 @@
+.Class {
+    // display: flex;
+    // justify-content: center;
+
+    .container {
+        h2 {
+            text-align: center;
+        }
+    }
+
+    .body {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        width: 100%;
+
+        td {
+            font-size: 1.5rem;
+        }
+    }
+
+
+}
