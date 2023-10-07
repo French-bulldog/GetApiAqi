@@ -8,13 +8,20 @@
         h2 {
             text-align: center;
         }
+
+        .form-check {
+            margin-top: 1rem;
+            width: 300px;
+
+            .button {
+                // display: inline-block;
+                // width: 100px;
+            }
+        }
     }
 
     .body {
-        // display: flex;
-        // justify-content: center;
-        // margin-top: 1rem;
-        // width: 100%
+
 
         .main {
 

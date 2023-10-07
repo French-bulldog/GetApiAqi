@@ -1,6 +1,10 @@
 .Class .container h2 {
   text-align: center;
 }
+.Class .container .form-check {
+  margin-top: 1rem;
+  width: 300px;
+}
 .Class .body .main:hover {
   animation: bounce;
   animation-duration: 2s;

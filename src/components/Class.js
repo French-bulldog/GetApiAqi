@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './styles/Class.css';
 import 'animate.css';
-import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
+import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 
 const Class = (props) => {
+
+
+    const [cardbodyshow, setCardBodyShow] = useState("d-none");
 
     // 存選擇的select值回父系
     const selectHandler = (event) => {
@@ -74,6 +77,19 @@ const Class = (props) => {
                             })
                         }
                     </select>
+                    <div className="form-check form-switch">
+                        {/* <div type="button" className=""> */}
+                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                            onClick={() => {
+                                setCardBodyShow((pre) => {
+                                    if (pre == "") return "d-none";
+                                    else return "";
+                                })
+                            }}
+                        />
+                        <label className="form-check-label w-25" htmlFor="flexSwitchCheckChecked">詳細資料</label>
+                        {/* </div> */}
+                    </div>
                 </div>
 
                 {/* g-4 裡面項目上下都margin間隔 */}
@@ -141,7 +157,7 @@ const Class = (props) => {
                                                 </div>
 
                                                 {/* 卡片內容 */}
-                                                <div className="card-body row">
+                                                <div className={`card-body row ${cardbodyshow}`}>
                                                     {/* <h5 className="card-title">Card title</h5> */}
                                                     {/* <p className="">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> */}
 
