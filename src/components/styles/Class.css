@@ -1,12 +1,21 @@
 .Class .container h2 {
   text-align: center;
 }
-.Class .body {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-  width: 100%;
+.Class .body .main:hover {
+  animation: bounce;
+  animation-duration: 2s;
 }
-.Class .body td {
-  font-size: 1.5rem;
+.Class .body .main .card .card-img-top {
+  -o-object-fit: cover;
+     object-fit: cover;
+  padding: 0.5rem;
+}
+.Class .body .main .card .card-img-top .content {
+  display: flex;
+}
+.Class .body .main .card .card-body .card-title {
+  font-weight: 700;
+}
+.Class .body .main .card .card-body .card-value {
+  color: rgba(0, 0, 0, 0.5);
 }/*# sourceMappingURL=Class.css.map */
