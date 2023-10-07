@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Class from '../components/Class';
+import Aos from 'aos';
+
+
 
 const Home = () => {
     // API 網址
@@ -18,6 +21,7 @@ const Home = () => {
     // 只有首次渲染呼叫 http API 函式
     useEffect(() => {
         search(initialURL);
+        Aos.init();  // 初始化僅執行一次
     }, []);
 
     return (
