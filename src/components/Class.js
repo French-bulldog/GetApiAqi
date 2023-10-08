@@ -94,6 +94,7 @@ const Class = (props) => {
             }
         };
 
+
         console.log(conuntrydata);
 
         return (
@@ -147,7 +148,7 @@ const Class = (props) => {
 
                 {/* g-4 裡面項目上下都margin間隔 */}
                 <div className='container mt-4'>
-                    <div className='body row' id="accordionExample">
+                    <div className='body row'>
                         {
                             conuntrydata[props.county].map((item, index) => {
 
@@ -156,10 +157,9 @@ const Class = (props) => {
                                 else Color = "green";
 
                                 return (
-
                                     <div key={`1_${index}`} data-aos="fade-up"
                                         data-aos-duration="3000" className="main col-sm-6 col-md-4 col-xl-3 mb-3">
-                                        <div className="">
+                                        <div className="" id="accordionExample">
                                             <div className="card h-100">
                                                 {/* 卡片圖片或標題 */}
 
@@ -192,7 +192,8 @@ const Class = (props) => {
                                                 </div>
 
                                                 {/* 卡片內容 */}
-                                                <div className={`card-body row accordion-collapse collapse`}
+                                                <div className={`card-body row accordion-collapse collapse 
+                                                ${(Conuntrydata?.[props.county]?.[index]?.["箭頭正反"]) ? "show" : ""}`}
                                                     id={`${item["測站名稱"]}`} data-bs-parent="#accordionExample"
                                                 >
                                                     <div className='col-12'>
@@ -222,7 +223,7 @@ const Class = (props) => {
                                                 <div className="card-footer">
                                                     <small className="text-muted">最後更新於&nbsp;{item["資料發布時間"]}</small>
 
-                                                    <div className='card-down' type="button" data-bs-toggle="collapse" data-bs-target={`#${item["測站名稱"]}`} aria-expanded="true" aria-controls="collapseOne"
+                                                    <div className='card-down' type="button" data-bs-toggle="" data-bs-target={`#${item["測站名稱"]}`} aria-expanded="false" aria-controls={`#${item["測站名稱"]}`}
                                                         onClick={() => HandlerArrow(props.county, index)}
                                                     >
 
