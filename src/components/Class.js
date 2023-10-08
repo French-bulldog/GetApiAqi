@@ -68,11 +68,12 @@ const Class = (props) => {
 
         const HandlerArrow = (city, index) => {
 
+            // Create a copy of the data to modify
+            const updatedData = { ...conuntrydata };
+
+
             // 如果還未將資料創建
             if (Conuntrydata === undefined) {
-
-                // Create a copy of the data to modify
-                const updatedData = { ...conuntrydata };
 
                 // Toggle the "箭頭正反" value
                 updatedData[city][index]["箭頭正反"] = !updatedData[city][index]["箭頭正反"];
@@ -83,10 +84,9 @@ const Class = (props) => {
             // 已創建資料
             else {
                 setConuntrydata((prevState) => {
-
                     if (prevState && prevState[city] && prevState[city][index]) {
-                        const updatedData = { ...prevState };
-                        updatedData[city][index]["箭頭正反"] = !updatedData[city][index]["箭頭正反"];
+                        const BeforeData = { ...prevState };
+                        updatedData[city][index]["箭頭正反"] = !BeforeData[city][index]["箭頭正反"];
                         return updatedData;
                     }
                 }
@@ -198,18 +198,21 @@ const Class = (props) => {
                                                     <div className='col-12'>
                                                         {
                                                             Object.entries(item).map((item1, index) => {
-                                                                return (<div key={index}>
-                                                                    <h6 className="card-title">
-                                                                        {
-                                                                            (item1[0] != "" || null) ? item1[0] : "BUG"
-                                                                        }
-                                                                    </h6>
-                                                                    <p className="card-value">
-                                                                        {
-                                                                            (item1[1] != "" || null) ? item1[1] : "尚無資料"
-                                                                        }
-                                                                    </p>
-                                                                </div>)
+
+                                                                if (item1[0] != "箭頭正反") {
+                                                                    return (<div key={index}>
+                                                                        <h6 className="card-title">
+                                                                            {
+                                                                                (item1[0] != "" || null) ? item1[0] : "BUG"
+                                                                            }
+                                                                        </h6>
+                                                                        <p className="card-value">
+                                                                            {
+                                                                                (item1[1] != "" || null) ? item1[1] : "尚無資料"
+                                                                            }
+                                                                        </p>
+                                                                    </div>)
+                                                                }
                                                             })
                                                         }
                                                     </div>
