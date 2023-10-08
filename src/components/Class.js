@@ -68,14 +68,30 @@ const Class = (props) => {
 
         const HandlerArrow = (city, index) => {
 
-            // Create a copy of the data to modify
-            const updatedData = { ...conuntrydata };
+            // 如果還未將資料創建
+            if (Conuntrydata === undefined) {
 
-            // Toggle the "箭頭正反" value
-            updatedData[city][index]["箭頭正反"] = !updatedData[city][index]["箭頭正反"];
+                // Create a copy of the data to modify
+                const updatedData = { ...conuntrydata };
 
-            // Update the state with the modified data
-            setConuntrydata(updatedData);
+                // Toggle the "箭頭正反" value
+                updatedData[city][index]["箭頭正反"] = !updatedData[city][index]["箭頭正反"];
+
+                // Update the state with the modified data
+                setConuntrydata(updatedData);
+            }
+            // 已創建資料
+            else {
+                setConuntrydata((prevState) => {
+
+                    if (prevState && prevState[city] && prevState[city][index]) {
+                        const updatedData = { ...prevState };
+                        updatedData[city][index]["箭頭正反"] = !updatedData[city][index]["箭頭正反"];
+                        return updatedData;
+                    }
+                }
+                )
+            }
         };
 
         console.log(conuntrydata);
