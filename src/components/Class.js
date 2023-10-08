@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/Class.css';
 import 'animate.css';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
@@ -6,9 +6,6 @@ import 'react-circular-progressbar/dist/styles.css';
 
 
 const Class = (props) => {
-
-
-    const [cardbodyshow, setCardBodyShow] = useState("d-none");
 
     // 存選擇的select值回父系
     const selectHandler = (event) => {
@@ -20,6 +17,8 @@ const Class = (props) => {
 
     // 依照縣市分類
     let conuntrydata = {};
+
+    const [Conuntrydata, setConuntrydata] = useState();
 
     // 在資料不存在時顯示預設內容或錯誤處理
     // 為何前面請求 http 未做完就送props過來?
@@ -58,10 +57,26 @@ const Class = (props) => {
 
             })
 
+            item = { ...item, ["箭頭正反"]: false };
+
             // 依照縣市分類
             conuntrydata[item["縣市"]].push(item);
         })
 
+
+
+
+        const HandlerArrow = (city, index) => {
+
+            // Create a copy of the data to modify
+            const updatedData = { ...conuntrydata };
+
+            // Toggle the "箭頭正反" value
+            updatedData[city][index]["箭頭正反"] = !updatedData[city][index]["箭頭正反"];
+
+            // Update the state with the modified data
+            setConuntrydata(updatedData);
+        };
 
         console.log(conuntrydata);
 
@@ -104,6 +119,7 @@ const Class = (props) => {
                         </div>
                     </div>
 
+
                     <select className="form-select" aria-label="Select example" defaultValue="臺北市" onChange={selectHandler}>
                         {
                             Country.map((item, index) => {
@@ -111,29 +127,11 @@ const Class = (props) => {
                             })
                         }
                     </select>
-                    <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
-                            onClick={() => {
-                                setCardBodyShow((pre) => {
-                                    if (pre == "") return "d-none";
-                                    else return "";
-                                })
-                            }}
-                        />
-                        <label className="form-check-label w-25" htmlFor="flexSwitchCheckChecked">詳細資料</label>
-                    </div>
                 </div>
 
                 {/* g-4 裡面項目上下都margin間隔 */}
                 <div className='container mt-4'>
-                    <div className='body row'>
-                        {/*
-                        40上
-                        15-40
-                        15下
-                        這邊本來要用reducer 因為只有一個變數，所以只會有一個狀態，無法及時渲染，
-                        這邊只能乖乖用style改
-                    */}
+                    <div className='body row' id="accordionExample">
                         {
                             conuntrydata[props.county].map((item, index) => {
 
@@ -142,34 +140,23 @@ const Class = (props) => {
                                 else Color = "green";
 
                                 return (
-                                    // <tr key={item.siteid} >
-                                    //     <td style={{ border: "0.1rem solid black", color: "black", background: Color }}>
-                                    //         地區：{item.sitename}，AQI：{item.aqi === '' ? '暫無資料' : item.aqi}
-                                    //         ，空氣品質：{item.status === "" ? '暫無資料' : item.status}
-                                    //     </td>
-                                    // </tr>
 
                                     <div key={`1_${index}`} data-aos="fade-up"
                                         data-aos-duration="3000" className="main col-sm-6 col-md-4 col-xl-3 mb-3">
                                         <div className="">
                                             <div className="card h-100">
-
-                                                {/* <img src="https://picsum.photos/seed/picsum/2000/2000" className="card-img-top" alt="..." /> */}
                                                 {/* 卡片圖片或標題 */}
 
                                                 <div className='card-img-top'>
-
-
                                                     <CircularProgressbarWithChildren
                                                         value={item["空氣品質指標"]}
                                                         styles={buildStyles({
                                                             textColor: Color,
                                                             pathColor: Color,
-                                                            // backgroundColor: "#3e98c7",
-                                                            // trailColor: "gold"
+
                                                         })}
                                                     >
-                                                        {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
+
 
                                                         <div className='content'>
                                                             <img
@@ -189,14 +176,13 @@ const Class = (props) => {
                                                 </div>
 
                                                 {/* 卡片內容 */}
-                                                <div className={`card-body row ${cardbodyshow}`}>
-                                                    {/* <h5 className="card-title">Card title</h5> */}
-                                                    {/* <p className="">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> */}
-
+                                                <div className={`card-body row accordion-collapse collapse`}
+                                                    id={`${item["測站名稱"]}`} data-bs-parent="#accordionExample"
+                                                >
                                                     <div className='col-12'>
                                                         {
                                                             Object.entries(item).map((item1, index) => {
-                                                                return (<>
+                                                                return (<div key={index}>
                                                                     <h6 className="card-title">
                                                                         {
                                                                             (item1[0] != "" || null) ? item1[0] : "BUG"
@@ -207,17 +193,35 @@ const Class = (props) => {
                                                                             (item1[1] != "" || null) ? item1[1] : "尚無資料"
                                                                         }
                                                                     </p>
-                                                                </>)
+                                                                </div>)
                                                             })
                                                         }
                                                     </div>
 
-
-
                                                 </div>
+
                                                 <div className="card-footer">
                                                     <small className="text-muted">最後更新於&nbsp;{item["資料發布時間"]}</small>
+
+                                                    <div className='card-down' type="button" data-bs-toggle="collapse" data-bs-target={`#${item["測站名稱"]}`} aria-expanded="true" aria-controls="collapseOne"
+                                                        onClick={() => HandlerArrow(props.county, index)}
+                                                    >
+
+                                                        {
+                                                            ((Conuntrydata[props.county][index]["箭頭正反"])) ? (
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-caret-up" viewBox="0 0 16 16">
+                                                                    <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
+                                                                </svg>
+                                                            ) : (
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-caret-down" viewBox="0 0 16 16">
+                                                                    <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                                                </svg>
+                                                            )
+                                                        }
+                                                    </div>
+
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>

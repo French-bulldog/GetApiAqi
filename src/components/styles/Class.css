@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .Class .container h2 {
   text-align: center;
 }
@@ -11,10 +12,10 @@
   justify-content: center;
 }
 .Class .container .level .item {
+  width: 150px;
   margin: 0.5rem;
   border-radius: 1rem;
   padding: 0.3rem;
-  width: 150px;
 }
 .Class .container .level .item .cation {
   color: #000000;
@@ -36,7 +37,6 @@
   background-color: blueviolet;
 }
 .Class .container .level .item6 {
-  margin-right: 0;
   background-color: brown;
 }
 .Class .container .form-select {
@@ -63,4 +63,31 @@
 }
 .Class .body .main .card .card-body .card-value {
   color: rgba(0, 0, 0, 0.5);
+}
+.Class .body .main .card .card-footer .card-down {
+  display: flex;
+  justify-content: center;
+}
+.Class .body .main .card .card-footer .card-down .bi {
+  width: 1.5rem;
+  height: 1.5rem;
+  /* 應用動畫 */
+}
+.Class .body .main .card .card-footer .card-down .bi:hover {
+  animation: bounce1 1s infinite;
+  /* 在 hover 時暫停動畫 */
+}
+@keyframes bounce1 {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+    /* 維持不動 */
+  }
+  40% {
+    transform: translateY(10px);
+    /* 向下移動 */
+  }
+  60% {
+    transform: translateY(0);
+    /* 回到原位 */
+  }
 }/*# sourceMappingURL=Class.css.map */
