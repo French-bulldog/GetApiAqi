@@ -24,7 +24,13 @@ const Class = (props) => {
     // 為何前面請求 http 未做完就送props過來?
     // 這邊可以做成function 用useEffect 做偵測，抓完資料才執行
     if (!props.data || !props.data.data || !props.data.data.records) {
-        return <div>資料讀取中...</div>;
+        return (
+            <div className='loading'>
+                {/* 資料讀取中... */}
+                <img src='https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw700'></img>
+            </div>
+        )
+
     }
     else {
 

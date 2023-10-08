@@ -1,3 +1,16 @@
+.loading {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+
+    img {
+        width: 100%;
+        // object-fit: cover;
+        // height: 100%;
+    }
+}
+
+
 .Class {
     // display: flex;
     // justify-content: center;

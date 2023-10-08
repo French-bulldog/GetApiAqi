@@ -12,10 +12,13 @@ const Home = () => {
     const [county, setCounty] = useState('臺北市');
 
     // 請求http API 函式
-    const search = async (url) => {
-        let result = await axios.get(initialURL, {
-        });
-        setData(result);
+    const search = (url) => {
+
+        setTimeout(async () => {
+            let result = await axios.get(initialURL, {
+            });
+            setData(result);
+        }, 2000)
     };
 
     // 只有首次渲染呼叫 http API 函式

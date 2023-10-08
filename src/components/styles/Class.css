@@ -1,4 +1,13 @@
 @charset "UTF-8";
+.loading {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.loading img {
+  width: 100%;
+}
+
 .Class .container h2 {
   text-align: center;
 }
