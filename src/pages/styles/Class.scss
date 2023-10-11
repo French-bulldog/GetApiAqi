@@ -28,19 +28,17 @@
 
         .level {
             font-weight: bold;
-            display: flex;
-            flex-wrap: wrap;
             color: white;
-            margin-bottom: 1rem;
             text-align: center;
             justify-content: center;
 
             .item {
-                // flex: 1 1 150px;
                 width: 150px;
-                margin: 0.5rem;
                 border-radius: 1rem;
                 padding: 0.3rem;
+                margin: 1rem;
+                margin-left: auto;
+                margin-right: auto;
 
                 .cation {
                     color: #000000;
