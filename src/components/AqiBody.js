@@ -9,9 +9,9 @@ const AqiBody = ({ conuntryData, county, handleArrowClick }) => {
                 conuntryData[county]?.map((item, index) => {
                     let color;
                     if (item["空氣品質指標"] > 301) color = "brown";
-                    else if (item["空氣品質指標"] >= 201 && item["空氣品質指標"] >= 300) color = "blueviolet";
-                    else if (item["空氣品質指標"] >= 151 && item["空氣品質指標"] >= 200) color = "red";
-                    else if (item["空氣品質指標"] >= 101 && item["空氣品質指標"] >= 150) color = "orange";
+                    else if (item["空氣品質指標"] >= 201 && item["空氣品質指標"] <= 300) color = "blueviolet";
+                    else if (item["空氣品質指標"] >= 151 && item["空氣品質指標"] <= 200) color = "red";
+                    else if (item["空氣品質指標"] >= 101 && item["空氣品質指標"] <= 150) color = "orange";
                     else if (item["空氣品質指標"] >= 51 && item["空氣品質指標"] <= 100) color = "gold";
                     else color = "green";
 
